@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 
 @RestController
@@ -23,9 +25,12 @@ public class WeatherController {
 
     //Get IP
     @GetMapping("/ip")
-    public String getIp(){
-        String ipUrl = "https://api.ipify.org"; // You can also use other services like "https://httpbin.org/ip"
-        return restTemplate.getForObject(ipUrl, String.class);
+    public String getIp() throws UnknownHostException {
+        //String ipUrl = "https://api.ipify.org"; // You can also use other services like "https://httpbin.org/ip"
+        //return restTemplate.getForObject(ipUrl, String.class);
+        InetAddress localHost = InetAddress.getLocalHost();
+        return localHost.getHostAddress();
+
     }
 
     // Endpoint for getting weather by location
