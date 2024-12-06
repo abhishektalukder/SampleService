@@ -1,7 +1,9 @@
 package com.example.SampleService;
 
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 
@@ -9,11 +11,21 @@ import java.time.LocalDate;
 @RequestMapping("/weather")
 public class WeatherController {
 
+    @Autowired
+    public RestTemplate restTemplate;
+
     private final WeatherService weatherService;
 
     @Autowired
     public WeatherController(WeatherService weatherService) {
         this.weatherService = weatherService;
+    }
+
+    //Get IP
+    @GetMapping("/ip")
+    public String getIp(){
+        String ipUrl = "https://api.ipify.org"; // You can also use other services like "https://httpbin.org/ip"
+        return restTemplate.getForObject(ipUrl, String.class);
     }
 
     // Endpoint for getting weather by location
