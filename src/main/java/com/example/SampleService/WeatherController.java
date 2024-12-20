@@ -26,8 +26,6 @@ public class WeatherController {
     //Get IP
     @GetMapping("/ip")
     public String getIp() throws UnknownHostException {
-        //String ipUrl = "https://api.ipify.org"; // You can also use other services like "https://httpbin.org/ip"
-        //return restTemplate.getForObject(ipUrl, String.class);
         InetAddress localHost = InetAddress.getLocalHost();
         return localHost.getHostAddress();
 
